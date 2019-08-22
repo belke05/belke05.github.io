@@ -38,7 +38,7 @@ let badPlanes = [];
 
 // frame rate so we can push new bolts every x amount of time
 let frames = 0;
-let score = frames / 5;
+var score = frames / 5;
 
 // -------- classes we will use ---------- //
 
@@ -157,6 +157,15 @@ let title = new Text(
   `THE EMPIRE REIGNS SUPREME!`
 );
 
+let win = new Text(
+  "60",
+  "center",
+  "green",
+  cvWidth / 2,
+  cvHeight / 2,
+  `THE REBEL ESCAPED!`
+);
+
 // will create an array of 20 bolts
 for (let index = 0; index < 20; index++) {
   let newBolt = new FireBolt();
@@ -168,6 +177,7 @@ for (let index = 0; index < 20; index++) {
 document.onkeydown = function(e) {
   console.log(e.key);
   plane.updateLocation(e.key);
+  shoot(e.key);
 };
 
 let intervalID = setInterval(animate, 20);
@@ -199,19 +209,27 @@ function animate() {
   );
   plane.update();
   updateBolts();
+  goodbolts.forEach(shot => {
+    shot.update();
+  });
+  ctx.fillStyle = "red";
+  ctx.font = "30px Arial";
+  ctx.fillText(`score: ${frames / 5}`, 10, 30);
+  ctx.font = "30px Arial";
+  ctx.fillText(`score: ${frames / 5}`, 10, 30);
+  console.log(score);
 
-  ctx.font = "30px Arial";
-  ctx.fillText(`score: ${frames / 5}`, 10, 30);
-  ctx.font = "30px Arial";
-  ctx.fillText(`score: ${frames / 5}`, 10, 30);
+  if (frames / 5 > 200) {
+    console.log("ghghhghg");
+
+    clearInterval(intervalID);
+    ctx.clearRect(0, 0, cvWidth, cvHeight);
+    win.draw();
+  }
   if (crash) {
-    let delt = document.querySelector("audio");
-    let m = delt.parentElement;
-    m.removeChild(delt);
     clearInterval(intervalID);
     ctx.clearRect(0, 0, cvWidth, cvHeight);
     title.draw();
-    audio.play();
   }
 }
 
@@ -228,3 +246,33 @@ function updateBolts() {
     }
   }
 }
+
+class Goodbolt {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.dy = boltSpeed;
+  }
+
+  // randomXspawn() {
+  //   this.x = Math.random() * (cvWidth - boltWidth);
+  // }
+
+  update() {
+    this.y -= this.dy;
+    this.draw();
+  }
+
+  draw() {
+    ctx.fillStyle = "green";
+    ctx.fillRect(this.x, this.y, boltWidth, boltHeight);
+  }
+}
+
+function shoot(e) {
+  if (e == " ") {
+    let goodshot = new Goodbolt(plane.x + PlaneWidth / 2, plane.y);
+    goodbolts.push(goodshot);
+  }
+}
+let goodbolts = [];
