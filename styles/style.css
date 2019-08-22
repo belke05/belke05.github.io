@@ -1,0 +1,77 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: fantasy;
+}
+
+#parent_container {
+  width: 100%;
+  position: relative;
+}
+
+#game_container {
+  position: relative; /*we will delete this later on so we can have a nice round planet behind */
+  /*background-image: url(../../pics/surface.jpg);*/
+}
+
+/*
+we only have one player character here we can style is 
+this is defined in the player class 
+*/
+
+#player,
+#target,
+#obstacle {
+  /* so we can move within the game-container
+   this will be a div element which will contain 
+   our image */
+  position: absolute;
+}
+
+/* this will edit the image representing the player 
+ make sure it is not too big*/
+#player img,
+#target img,
+#obstacle img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+#canvas {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(#020013 30%, #0c002b 50%, #020013 100%);
+}
+
+#failmsgbtn {
+  z-index: 10;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+  color: #ff5959;
+}
+
+#replay_btn {
+  padding: 3px;
+  margin: 3px;
+}
+
+#winMsg {
+  z-index: 10;
+  font-size: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+  color: #54ff00;
+}
