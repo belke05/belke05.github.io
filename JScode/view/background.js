@@ -190,13 +190,17 @@ let title = document.getElementById("title");
 let parent = document.getElementById("textContainer");
 let intro = parent.firstChild;
 
-let introSound = new Audio();
-introSound.src = "../../music/intro.mp3";
+//let introSound = new Audio();
+//introSound.src = "../../music/intro.mp3";
+let introtheme = document.createElement("audio");
+introtheme.src = "../../music/intro.mp3";
+introtheme.autoplay = true;
+// comment
 
 setTimeout(function() {
   parent.removeChild(intro);
   parent.innerHTML = '<h1 id="title">Escaping Dagobah</h1>';
-  introSound.play();
+  document.querySelector("body").appendChild(introtheme);
   setTimeout(function() {
     parent.classList.add("perspective");
     parent.innerHTML = "";

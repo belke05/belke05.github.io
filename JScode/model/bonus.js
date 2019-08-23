@@ -151,7 +151,7 @@ let plane = new Plane(cvWidth / 2 - PlaneWidth / 2, cvHeight - PlaneHeight);
 let title = new Text(
   "60",
   "center",
-  "darkred",
+  "da0003",
   cvWidth / 2,
   cvHeight / 2,
   `THE EMPIRE REIGNS SUPREME!`
@@ -160,7 +160,7 @@ let title = new Text(
 let win = new Text(
   "60",
   "center",
-  "green",
+  "#2ED33B",
   cvWidth / 2,
   cvHeight / 2,
   `THE REBEL ESCAPED!`
@@ -220,8 +220,6 @@ function animate() {
   console.log(score);
 
   if (frames / 5 > 200) {
-    console.log("ghghhghg");
-
     clearInterval(intervalID);
     ctx.clearRect(0, 0, cvWidth, cvHeight);
     win.draw();
