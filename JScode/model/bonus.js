@@ -166,6 +166,15 @@ let win = new Text(
   `THE REBEL ESCAPED!`
 );
 
+let retry = new Text(
+  "30",
+  "center",
+  "white",
+  cvWidth / 2,
+  cvHeight / 2 + 60,
+  `press r to retry`
+);
+
 // will create an array of 20 bolts
 for (let index = 0; index < 20; index++) {
   let newBolt = new FireBolt();
@@ -223,11 +232,23 @@ function animate() {
     clearInterval(intervalID);
     ctx.clearRect(0, 0, cvWidth, cvHeight);
     win.draw();
+    retry.draw();
+    window.onkeypress = function(e) {
+      if (e.key === "r") {
+        window.location.href = "index.html";
+      }
+    };
   }
   if (crash) {
     clearInterval(intervalID);
     ctx.clearRect(0, 0, cvWidth, cvHeight);
     title.draw();
+    retry.draw();
+    window.onkeypress = function(e) {
+      if (e.key === "r") {
+        window.location.href = "index.html";
+      }
+    };
   }
 }
 
